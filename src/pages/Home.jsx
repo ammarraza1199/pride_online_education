@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Minus, Quote, ArrowLeft, ArrowRight } from 'lucide-react';
 import CourseCard from '../components/CourseCard';
 import RecentCourses from '../components/RecentCourses';
+import CourseEnquireModal from '../components/CourseEnquireModal';
 import { motion } from 'framer-motion';
 
 const Home = () => {
   const [activeFaq, setActiveFaq] = useState(0);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   const faqs = [
     { question: "What is Pride Online Education?", answer: "Pride Online Education is a trusted educational institution based in Belagavi, Karnataka, operating since 2006. We offer a wide range of distance education, online degree programs, SSLC & PUC courses, and various digital skill certifications tailored for career growth." },
@@ -233,7 +235,12 @@ const Home = () => {
               </p>
             </motion.div>
             
-            <motion.button variants={fadeInUp} className="bg-[#161c44] text-white px-[40px] py-[15px] font-semibold text-[15px] transition-transform hover:-translate-y-1" style={{ boxShadow: "6px 6px 0px #8e9bc5" }}>
+            <motion.button 
+              variants={fadeInUp} 
+              onClick={() => setIsQuoteModalOpen(true)}
+              className="bg-[#161c44] text-white px-[40px] py-[15px] font-semibold text-[15px] transition-transform hover:-translate-y-1" 
+              style={{ boxShadow: "6px 6px 0px #8e9bc5" }}
+            >
               Get a Quote
             </motion.button>
           </motion.div>
@@ -472,6 +479,12 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+      
+      <CourseEnquireModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+        defaultCourse="Get Quote" 
+      />
     </div>
   );
 };

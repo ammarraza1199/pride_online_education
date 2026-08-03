@@ -4,19 +4,19 @@ import { motion } from 'framer-motion';
 
 const ITCourses = () => {
   const itCourses = [
-    { title: "Back Office", description: "Learn essential back office skills and management.", image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "Digital Designing", description: "Master graphic design, UI/UX, and visual communication.", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "CAD Careers", description: "AutoCAD and 3D modeling for engineering and architecture.", image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "Software Developer", description: "Learn programming languages and software engineering.", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "Digital Marketing", description: "SEO, SEM, Social Media, and digital advertising strategies.", image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "Animation", description: "2D and 3D animation techniques and software.", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "VFX", description: "Visual effects for film, television, and gaming.", image: "https://images.unsplash.com/photo-1535016120720-40c746a6580c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "Office Assistance", description: "This course covers various attributes required for an", image: "https://images.unsplash.com/photo-1556761175-5973dc0f32b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "Front office courses", description: "This is Pride Online Education flagship course with high quality", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "C & C++ Programming", description: "C is a widely used and user-friendly programming", image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "DBMS", description: "This course provides a comprehensive introduction", image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "PHP", description: "This course provides an in-depth exploration of PHP,", image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "Python Programming", description: "Learn the fundamentals of Python for data science", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "Back Office", description: "Learn essential back office skills and management.", image: "/images/course_mba.png" },
+    { title: "Digital Designing", description: "Master graphic design, UI/UX, and visual communication.", image: "/images/it_design_image.png" },
+    { title: "CAD Careers", description: "AutoCAD and 3D modeling for engineering and architecture.", image: "/images/it_design_image.png" },
+    { title: "Software Developer", description: "Learn programming languages and software engineering.", image: "/images/it_code_image.png" },
+    { title: "Digital Marketing", description: "SEO, SEM, Social Media, and digital advertising strategies.", image: "/images/it_data_image.png" },
+    { title: "Animation", description: "2D and 3D animation techniques and software.", image: "/images/it_design_image.png" },
+    { title: "VFX", description: "Visual effects for film, television, and gaming.", image: "/images/it_design_image.png" },
+    { title: "Office Assistance", description: "This course covers various attributes required for an", image: "/images/course_mba.png" },
+    { title: "Front office courses", description: "This is Pride Online Education flagship course with high quality", image: "/images/course_mba.png" },
+    { title: "C & C++ Programming", description: "C is a widely used and user-friendly programming", image: "/images/it_code_image.png" },
+    { title: "DBMS", description: "This course provides a comprehensive introduction", image: "/images/it_data_image.png" },
+    { title: "PHP", description: "This course provides an in-depth exploration of PHP,", image: "/images/it_code_image.png" },
+    { title: "Python Programming", description: "Learn the fundamentals of Python for data science", image: "/images/it_code_image.png" },
   ];
 
   const staggerContainer = {
