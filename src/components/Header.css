@@ -1,0 +1,168 @@
+.header {
+  width: 100%;
+  position: sticky;
+  top: -40px; /* Scrolls past the 40px top bar and sticks the main-nav */
+  z-index: 1000;
+}
+
+.top-bar {
+  background-color: white; /* right side is white */
+  color: #333;
+  font-size: 13px;
+  position: relative;
+  overflow: hidden; /* to prevent the -50vw left pseudo element from causing scrollbars */
+}
+
+.top-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 40px;
+  position: relative;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding-right: 60px; /* space for the diagonal cut */
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+/* The dark blue diagonal background that extends indefinitely to the left */
+.contact-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: -50vw; /* extend far to the left edge of the screen */
+  background-color: var(--primary-blue);
+  
+  /* Use skew instead of clip-path so that box-shadow isn't clipped away */
+  transform-origin: top right;
+  transform: skewX(-32deg);
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4);
+  
+  z-index: -1;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  transition: opacity 0.3s;
+  font-weight: 500;
+}
+
+.contact-item:hover {
+  opacity: 0.8;
+}
+
+.timing-enquire {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  z-index: 2;
+}
+
+.timing {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.btn-enquire {
+  background-color: var(--primary-blue); 
+  color: white;
+  border: none;
+  padding: 0 35px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  height: 100%;
+  margin-left: 10px;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.btn-enquire:hover {
+  background-color: var(--primary-red);
+  box-shadow: -4px 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.main-nav {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border-color);
+  padding: 15px 0;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-brand {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.degree {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary-blue);
+}
+
+.point {
+  font-size: 24px;
+  font-weight: 300; /* POINT is slightly lighter or same weight but red */
+  color: var(--primary-red);
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  font-size: 11px;
+  color: #444;
+  align-self: flex-end;
+  margin-top: 2px;
+  margin-right: 5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-link {
+  font-weight: 600;
+  font-size: 15px;
+  color: #555;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--primary-blue);
+}

@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-blue: #0d1a3b;
+  --primary-red: #ef3239;
+  --white: #ffffff;
+  --secondary-gray: #f5f7fa;
+  --text-dark: #333333;
+  --text-light: #666666;
+  --border-color: #e5e7eb;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: var(--text-dark);
+  background-color: var(--white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Typography Utility Classes */
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+
+.h1 { font-size: 2.5rem; }
+.h2 { font-size: 2rem; }
+.h3 { font-size: 1.75rem; }
+.h4 { font-size: 1.5rem; }
+.h5 { font-size: 1.25rem; }
+.h6 { font-size: 1rem; }
+
+/* Button utility */
+.btn-primary {
+  display: inline-block;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #07122a;
+}
+
+@keyframes slide-zigzag {
+  0% { background-position: 0 0; }
+  100% { background-position: -28px 0; }
+}
+
+@keyframes slide-zigzag-large {
+  0% { background-position: 0 0; }
+  100% { background-position: -80px 0; }
+}
+
+.animate-zigzag {
+  animation: slide-zigzag-large 4s linear infinite;
+}
+
+.card-group:hover .animate-zigzag-hover {
+  animation: slide-zigzag 1.5s linear infinite;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-cards-hero {
+  0%, 40% { transform: translateX(0); }
+  50%, 90% { transform: translateX(-280px); }
+  100% { transform: translateX(0); }
+}
+
+.animate-slide-cards {
+  animation: slide-cards-hero 8s ease-in-out infinite;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
