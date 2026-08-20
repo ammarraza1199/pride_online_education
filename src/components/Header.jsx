@@ -110,8 +110,8 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex flex-1 justify-start items-center ml-[110px] gap-[48px] pr-[60px]">
-            {['Home', 'About Us', 'IT Courses', 'University Course', 'PG Course', 'Contact Us'].map((text, idx) => {
-              const paths = ['/', '/about-us', '/it-courses', '/ug-course', '/pg-course', '/contact-us'];
+            {['Home', 'About Us', 'IT Courses', 'University Course', 'PG Course', 'Blog', 'Contact Us'].map((text, idx) => {
+              const paths = ['/', '/about-us', '/it-courses', '/ug-course', '/pg-course', '/blog', '/contact-us'];
               return (
                 <NavLink 
                   key={idx} 
@@ -133,8 +133,8 @@ const Header = () => {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden absolute top-[100%] left-0 w-full bg-white border-t border-[#e5e7eb] shadow-lg flex flex-col py-4 px-6 z-50">
-            {['Home', 'About Us', 'IT Courses', 'University Course', 'PG Course', 'Contact Us'].map((text, idx) => {
-              const paths = ['/', '/about-us', '/it-courses', '/ug-course', '/pg-course', '/contact-us'];
+            {['Home', 'About Us', 'IT Courses', 'University Course', 'PG Course', 'Blog', 'Contact Us'].map((text, idx) => {
+              const paths = ['/', '/about-us', '/it-courses', '/ug-course', '/pg-course', '/blog', '/contact-us'];
               return (
                 <NavLink 
                   key={idx} 

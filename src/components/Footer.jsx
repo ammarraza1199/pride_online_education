@@ -89,6 +89,7 @@ const Footer = () => {
         <div className="flex-1 w-full md:w-auto min-w-[250px] flex flex-col">
           <h4 className="text-white text-[20px] mb-[25px]">Useful Links</h4>
           <ul className="flex flex-col gap-[12px] list-none p-0 m-0">
+            <li><Link to="/blog" className="flex items-center gap-[5px] transition-colors duration-300 text-[14px] hover:text-primary-red"><ChevronRight size={14} /> Blog</Link></li>
             <li><Link to="/contact-us" className="flex items-center gap-[5px] transition-colors duration-300 text-[14px] hover:text-primary-red"><ChevronRight size={14} /> Contact Us</Link></li>
             <li><Link to="/ug-course" className="flex items-center gap-[5px] transition-colors duration-300 text-[14px] hover:text-primary-red"><ChevronRight size={14} /> UG Course</Link></li>
             <li><Link to="/pg-course" className="flex items-center gap-[5px] transition-colors duration-300 text-[14px] hover:text-primary-red"><ChevronRight size={14} /> PG Course</Link></li>
