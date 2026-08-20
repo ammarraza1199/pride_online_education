@@ -52,7 +52,7 @@ const Footer = () => {
           </p>
           <div className="w-full max-w-[280px] h-[120px] mb-[20px] rounded overflow-hidden">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15352.029816560412!2d74.50284898715822!3d15.855909200000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf66a066927d75%3A0xd672bce7171d87e0!2sKirloskar%20Rd%2C%20Raviwar%20Peth%2C%20Belagavi%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1714000000000!5m2!1sen!2sin" 
+              src="https://maps.google.com/maps?q=15.858985,74.509409&t=&z=16&ie=UTF8&iwloc=&output=embed" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
@@ -77,15 +77,22 @@ const Footer = () => {
             <Mail size={20} className="text-primary-red" />
             <span>info@prideonlineeducation.com</span>
           </div>
+          <div className="flex items-center gap-[15px] text-white text-[16px] font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary-red">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Mon - Sat: 9:00 AM - 6:00 PM</span>
+          </div>
         </div>
 
         <div className="flex-1 w-full md:w-auto min-w-[250px] flex flex-col">
           <h4 className="text-white text-[20px] mb-[25px]">Useful Links</h4>
           <ul className="flex flex-col gap-[12px] list-none p-0 m-0">
-            <li><Link to="/contact" className="flex items-center gap-[5px] transition-colors duration-300 text-[14px] hover:text-primary-red"><ChevronRight size={14} /> Contact Us</Link></li>
+            <li><Link to="/contact-us" className="flex items-center gap-[5px] transition-colors duration-300 text-[14px] hover:text-primary-red"><ChevronRight size={14} /> Contact Us</Link></li>
             <li><Link to="/ug-course" className="flex items-center gap-[5px] transition-colors duration-300 text-[14px] hover:text-primary-red"><ChevronRight size={14} /> UG Course</Link></li>
             <li><Link to="/pg-course" className="flex items-center gap-[5px] transition-colors duration-300 text-[14px] hover:text-primary-red"><ChevronRight size={14} /> PG Course</Link></li>
-            <li><Link to="/" className="flex items-center gap-[5px] transition-colors duration-300 text-[14px] hover:text-primary-red"><ChevronRight size={14} /> FAQs</Link></li>
+            <li><Link to="/#faqs" className="flex items-center gap-[5px] transition-colors duration-300 text-[14px] hover:text-primary-red"><ChevronRight size={14} /> FAQs</Link></li>
           </ul>
         </div>
       </div>

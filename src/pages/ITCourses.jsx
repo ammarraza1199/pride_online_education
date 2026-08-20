@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CourseCard from '../components/CourseCard';
+import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 const ITCourses = () => {
-  const itCourses = [
-    { title: "Back Office", description: "Learn essential back office skills and management.", image: "/images/course_mba.png" },
-    { title: "Digital Designing", description: "Master graphic design, UI/UX, and visual communication.", image: "/images/it_design_image.png" },
-    { title: "CAD Careers", description: "AutoCAD and 3D modeling for engineering and architecture.", image: "/images/it_design_image.png" },
-    { title: "Software Developer", description: "Learn programming languages and software engineering.", image: "/images/it_code_image.png" },
-    { title: "Digital Marketing", description: "SEO, SEM, Social Media, and digital advertising strategies.", image: "/images/it_data_image.png" },
-    { title: "Animation", description: "2D and 3D animation techniques and software.", image: "/images/it_design_image.png" },
-    { title: "VFX", description: "Visual effects for film, television, and gaming.", image: "/images/it_design_image.png" },
-    { title: "Office Assistance", description: "This course covers various attributes required for an", image: "/images/course_mba.png" },
-    { title: "Front office courses", description: "This is Pride Online Education flagship course with high quality", image: "/images/course_mba.png" },
-    { title: "C & C++ Programming", description: "C is a widely used and user-friendly programming", image: "/images/it_code_image.png" },
-    { title: "DBMS", description: "This course provides a comprehensive introduction", image: "/images/it_data_image.png" },
-    { title: "PHP", description: "This course provides an in-depth exploration of PHP,", image: "/images/it_code_image.png" },
-    { title: "Python Programming", description: "Learn the fundamentals of Python for data science", image: "/images/it_code_image.png" },
-  ];
+  const [itCourses, setItCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const q = query(collection(db, 'courses'), where('category', '==', 'IT'));
+        const querySnapshot = await getDocs(q);
+        const courses = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setItCourses(courses);
+      } catch (error) {
+        console.error("Error fetching IT courses: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchCourses();
+  }, []);
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -46,6 +56,11 @@ const ITCourses = () => {
 
   return (
     <div className="w-full">
+      <SEO 
+        title="IT & Computer Courses - Pride Online Education" 
+        description="Explore our industry-recognized IT and Computer certification courses designed to boost your tech career in Belagavi."
+        url="/it-courses"
+      />
       {/* Page Header */}
       <div className="bg-primary-blue text-white py-[60px] text-center">
         <motion.div 
@@ -54,7 +69,7 @@ const ITCourses = () => {
           transition={{ duration: 0.5 }}
           className="container mx-auto px-4"
         >
-          <h1 className="text-[42px] font-bold mb-[10px]">IT course</h1>
+          <h1 className="text-[42px] font-bold mb-[10px]">IT Courses</h1>
           <div className="text-[14px] text-[#ccc]">Home / IT course</div>
         </motion.div>
       </div>
@@ -68,21 +83,37 @@ const ITCourses = () => {
             transition={{ duration: 0.5 }}
             className="text-[32px] text-primary-blue font-bold mb-[40px] text-center"
           >
-            Information Technology Course
+            Information Technology Courses
           </motion.h2>
-          <motion.div 
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.05 }}
-            variants={staggerContainer}
-            className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[30px]"
-          >
-            {itCourses.map((course, index) => (
-              <motion.div variants={fadeInUp} key={index}>
-                <CourseCard title={course.title} description={course.description} image={course.image} />
-              </motion.div>
-            ))}
-          </motion.div>
+          
+          {loading ? (
+            <div className="flex justify-center py-10">
+              <div className="w-12 h-12 border-4 border-gray-200 border-t-primary-red rounded-full animate-spin"></div>
+            </div>
+          ) : (
+            <motion.div 
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.05 }}
+              variants={staggerContainer}
+              className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[30px]"
+            >
+              {itCourses.length === 0 ? (
+                <div className="col-span-full text-center text-gray-500">No IT courses found.</div>
+              ) : (
+                itCourses.map((course) => (
+                  <motion.div variants={fadeInUp} key={course.id}>
+                    <CourseCard 
+                      title={course.title} 
+                      description={course.description || course.seoDescription} 
+                      image={course.image || '/images/it_code_image.png'} 
+                      to={`/${course.slug}`} 
+                    />
+                  </motion.div>
+                ))
+              )}
+            </motion.div>
+          )}
         </div>
       </section>
 

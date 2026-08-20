@@ -10,11 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "firebase": "^12.17.1",
     "framer-motion": "^12.43.0",
     "lucide-react": "^1.28.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router-dom": "^7.18.2"
+    "react-helmet-async": "^3.0.0",
+    "react-hook-form": "^7.85.0",
+    "react-quill-new": "^3.8.3",
+    "react-router-dom": "^7.18.2",
+    "vite-plugin-sitemap": "^0.8.2"
   },
   "devDependencies": {
     "@types/react": "^19.2.17",

@@ -2,6 +2,7 @@ import React from 'react';
 import { Phone, Award, Check, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 
 const About = () => {
   const staggerContainer = {
@@ -26,6 +27,11 @@ const About = () => {
 
   return (
     <div className="w-full font-['Poppins',sans-serif] text-[#333]">
+      <SEO 
+        title="About Us - Pride Online Education" 
+        description="Learn about Pride Online Education, empowering learners since 2006 with distance education and IT certification courses in Belagavi."
+        url="/about-us"
+      />
       {/* Top angled background header */}
       <div className="w-full h-[300px] bg-[#f9fafc] flex flex-col justify-center items-center relative" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)' }}>
         <motion.div 

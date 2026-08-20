@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Minus, Quote, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import CourseCard from '../components/CourseCard';
 import RecentCourses from '../components/RecentCourses';
 import CourseEnquireModal from '../components/CourseEnquireModal';
+import FAQSection from '../components/FAQSection';
+import Testimonials from '../components/Testimonials';
+import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 
 const Home = () => {
@@ -21,7 +25,10 @@ const Home = () => {
     { text: "This course exceeded my expectations and made learning enjoyable and easy to follow!", name: "Sarah", role: "Software Developer" },
     { text: "Great experience learning here. The faculty is very supportive and the curriculum is well structured.", name: "Rahul K.", role: "BCA Graduate" },
     { text: "The practical sessions and projects helped me gain real-world skills. Highly recommended!", name: "Priya S.", role: "MCA Student" },
-    { text: "Excellent placement support. The trainers were always available to clear my doubts.", name: "Amit V.", role: "Digital Marketing Alumni" }
+    { text: "Excellent placement support. The trainers were always available to clear my doubts.", name: "Amit V.", role: "Digital Marketing Alumni" },
+    { text: "The flexibility of the distance education program allowed me to complete my B.Com while working full-time. Thank you Pride Education!", name: "Kavya M.", role: "B.Com Graduate" },
+    { text: "I enrolled in the Python programming course and it completely transformed my career path. The instructors are top-notch.", name: "Suresh P.", role: "Data Analyst" },
+    { text: "From admission to final exams, the entire process was smooth. The study materials provided are comprehensive and easy to understand.", name: "Anita D.", role: "MBA Professional" }
   ];
 
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -60,6 +67,11 @@ const Home = () => {
 
   return (
     <div className="w-full">
+      <SEO 
+        title="Home - Pride Online Education" 
+        description="Pride Online Education offers top-rated distance education, UG/PG degrees, and IT certification courses in Belagavi to accelerate your career."
+        url="/"
+      />
       {/* Hero Section */}
       <section className="bg-[#eef0f3] text-[#3a3a3a] pt-[140px] pb-[160px] relative overflow-hidden min-h-[600px]">
         {/* Background shape and image */}
@@ -119,9 +131,9 @@ const Home = () => {
                 </div>
                 <h3 className="text-[17px] font-bold mb-[15px] text-[#333] font-['Poppins'] leading-[1.3]">Mobile App Development</h3>
                 <p className="text-[13px] text-[#777] mb-[25px] leading-[1.6]">Have you ever thought of creating your own mobile app? If yes</p>
-                <a href="/ug-course" className="text-[#0B1D52] font-bold text-[13px] flex items-center gap-1 hover:text-[#ef3239] transition-colors mt-auto no-underline">
+                <Link to="/computer-courses" className="text-[#0B1D52] font-bold text-[13px] flex items-center gap-1 hover:text-[#ef3239] transition-colors mt-auto no-underline">
                   View More <span className="text-[#ef3239] ml-1">→</span>
-                </a>
+                </Link>
               </motion.div>
 
               {/* Card 2 */}
@@ -135,9 +147,9 @@ const Home = () => {
                 </div>
                 <h3 className="text-[17px] font-bold mb-[15px] text-[#333] font-['Poppins'] leading-[1.3]">PHP</h3>
                 <p className="text-[13px] text-[#777] mb-[25px] leading-[1.6]">This course provides an in-depth exploration of PHP,</p>
-                <a href="/ug-course" className="text-[#0B1D52] font-bold text-[13px] flex items-center gap-1 hover:text-[#ef3239] transition-colors mt-auto no-underline">
+                <Link to="/computer-courses" className="text-[#0B1D52] font-bold text-[13px] flex items-center gap-1 hover:text-[#ef3239] transition-colors mt-auto no-underline">
                   View More <span className="text-[#ef3239] ml-1">→</span>
-                </a>
+                </Link>
               </motion.div>
 
               {/* Card 3 - Python */}
@@ -151,9 +163,9 @@ const Home = () => {
                 </div>
                 <h3 className="text-[17px] font-bold mb-[15px] text-[#333] font-['Poppins'] leading-[1.3]">Python</h3>
                 <p className="text-[13px] text-[#777] mb-[25px] leading-[1.6]">Learn the fundamentals of Python for software and data</p>
-                <a href="/ug-course" className="text-[#0B1D52] font-bold text-[13px] flex items-center gap-1 hover:text-[#ef3239] transition-colors mt-auto no-underline">
+                <Link to="/computer-courses" className="text-[#0B1D52] font-bold text-[13px] flex items-center gap-1 hover:text-[#ef3239] transition-colors mt-auto no-underline">
                   View More <span className="text-[#ef3239] ml-1">→</span>
-                </a>
+                </Link>
               </motion.div>
               
               </motion.div>
@@ -259,7 +271,7 @@ const Home = () => {
             className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[50px] gap-4"
           >
             <h2 className="text-[26px] md:text-[36px] text-[#222222] font-extrabold mb-0 font-['Poppins'] text-center md:text-left">Pride Online Education Have Course Categories</h2>
-            <a href="/ug-course" className="bg-[#ef3239] text-white px-[30px] py-[15px] font-bold rounded-md transition-colors hover:bg-red-700 hover:shadow-lg no-underline font-['Poppins'] tracking-wide text-[16px] inline-block">Explore Courses</a>
+            <Link to="/ug-course" className="bg-[#ef3239] text-white px-[30px] py-[15px] font-bold rounded-md transition-colors hover:bg-red-700 hover:shadow-lg no-underline font-['Poppins'] tracking-wide text-[16px] inline-block">Explore Courses</Link>
           </motion.div>
           <motion.div 
             initial="hidden"
@@ -269,73 +281,31 @@ const Home = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]"
           >
             <motion.div variants={fadeInUp}>
-              <CourseCard title="BA & Distance Mode" description="Bachelor of Arts in India is an art degree that basically focuses on" to="/ug-course" image="/images/course_arts.png" />
+              <CourseCard title="BA & Distance Mode" description="Bachelor of Arts in India is an art degree that basically focuses on" to="/ba-admission" image="/images/course_arts.png" />
             </motion.div>
             <motion.div variants={fadeInUp}>
-              <CourseCard title="B.Com & Distance Mode" description="Our B.Com program equips students with strong knowledge in finance" to="/ug-course" image="/images/course_commerce.png" />
+              <CourseCard title="B.Com & Distance Mode" description="Our B.Com program equips students with strong knowledge in finance" to="/bcom-admission" image="/images/course_commerce.png" />
             </motion.div>
             <motion.div variants={fadeInUp}>
-              <CourseCard title="B.Sc & Distance Mode" description="For students passionate about science and research,." to="/ug-course" image="/images/course_science.png" />
+              <CourseCard title="B.Sc & Distance Mode" description="For students passionate about science and research,." to="/online-degree" image="/images/course_science.png" />
             </motion.div>
             <motion.div variants={fadeInUp}>
-              <CourseCard title="Master of Arts (M.A.)" description="Master of Arts is a postgraduate program designed to expand" to="/ug-course" image="/images/course_arts.png" />
+              <CourseCard title="Master of Arts (M.A.)" description="Master of Arts is a postgraduate program designed to expand" to="/pg-course" image="/images/course_arts.png" />
             </motion.div>
             <motion.div variants={fadeInUp}>
-              <CourseCard title="Master of Commerce (M.Com)" description="Advance your career in accounting, finance, and taxation" to="/ug-course" image="/images/course_mcom.png" />
+              <CourseCard title="Master of Commerce (M.Com)" description="Advance your career in accounting, finance, and taxation" to="/pg-course" image="/images/course_mcom.png" />
             </motion.div>
             <motion.div variants={fadeInUp}>
-              <CourseCard title="Master of Business Administration" description="Develop essential management and leadership skills" to="/ug-course" image="/images/course_mba.png" />
+              <CourseCard title="Master of Business Administration" description="Develop essential management and leadership skills" to="/pg-course" image="/images/course_mba.png" />
             </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-[80px] bg-secondary-gray overflow-hidden">
-        <div className="container mx-auto px-4 flex flex-col lg:flex-row gap-[50px] items-start">
-          <motion.div 
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="flex-1 w-full"
-          >
-            <motion.h2 variants={fadeInUp} className="text-[22px] md:text-[32px] text-primary-blue font-bold mb-[20px] text-center md:text-left">Frequently Asked Question</motion.h2>
-            <div className="flex flex-col gap-[15px]">
-              {faqs.map((faq, index) => (
-                <motion.div 
-                  variants={fadeInLeft}
-                  key={index} 
-                  className={`bg-white border border-border-color rounded-[6px] overflow-hidden`}
-                  onClick={() => setActiveFaq(index)}
-                >
-                  <div className={`p-[20px] flex justify-between items-center font-semibold cursor-pointer transition-colors duration-300 ${activeFaq === index ? 'bg-primary-red text-white border-primary-red' : 'text-primary-blue hover:text-primary-red'}`}>
-                    {faq.question}
-                    {activeFaq === index ? <Minus size={18} /> : <Plus size={18} />}
-                  </div>
-                  {activeFaq === index && (
-                    <motion.div 
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      className="p-[20px] border-t border-border-color text-text-light"
-                    >
-                      {faq.answer}
-                    </motion.div>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex-1 flex justify-center items-center w-full"
-          >
-            <img src="/images/faq_image.png" alt="Frequently Asked Questions" className="w-full max-w-[500px] h-auto object-cover rounded-[8px] shadow-xl" />
-          </motion.div>
-        </div>
+      {/* FAQ Section */}
+      <section id="faqs" className="bg-secondary-gray overflow-hidden pb-[80px]">
+        <FAQSection faqs={faqs} />
       </section>
       
       {/* Benefits Section using Framer Motion */}
@@ -416,69 +386,8 @@ const Home = () => {
       <RecentCourses />
 
       {/* Testimonials */}
-      <section className="py-[100px] bg-[#f0f2f5] relative overflow-hidden">
-        {/* Map Background Pattern (Simulated) */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#000 1.5px, transparent 1.5px)', backgroundSize: '20px 20px' }}></div>
-        
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h5 className="text-[14px] text-[#0B1D52] font-bold tracking-[2px] uppercase mb-[10px]">Testimonials</h5>
-            <h2 className="text-[40px] text-[#222222] font-extrabold mb-[50px] font-['Poppins']">Student Feedback</h2>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative max-w-[1000px] mx-auto flex items-center justify-center group"
-          >
-            {/* Left Arrow */}
-            <button 
-              onClick={() => setActiveTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))}
-              className="absolute left-[-20px] lg:left-[-60px] text-[#0B1D52] hover:text-[#ef3239] transition-colors cursor-pointer bg-transparent border-none z-20"
-            >
-              <ArrowLeft size={32} strokeWidth={1.5} />
-            </button>
-
-            {/* Testimonial Cards */}
-            <div className="w-full overflow-hidden px-4 py-6">
-              <div 
-                className="flex transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
-                style={{ transform: `translateX(-${activeTestimonial * 100}%)` }}
-              >
-                {testimonials.map((testimonial, idx) => (
-                  <div key={idx} className="w-full flex-shrink-0 px-4">
-                    <div className="bg-white p-[50px] md:p-[80px] shadow-[0_15px_50px_rgba(0,0,0,0.06)] rounded-[2px] mx-auto w-full flex flex-col items-center">
-                      <div className="flex justify-center mb-[30px]">
-                        <Quote size={54} className="text-[#ef3239]" strokeWidth={2} />
-                      </div>
-                      <p className="text-[18px] md:text-[22px] text-[#444444] font-medium mb-[40px] leading-[1.8] max-w-[700px] text-center font-['Poppins']">
-                        {testimonial.text}
-                      </p>
-                      <h4 className="font-extrabold text-[#000000] text-[22px] font-['Poppins']">- {testimonial.name}</h4>
-                      <p className="text-[15px] text-[#666666] mt-1 font-['Poppins']">{testimonial.role}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Arrow */}
-            <button 
-              onClick={() => setActiveTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))}
-              className="absolute right-[-20px] lg:right-[-60px] text-[#0B1D52] hover:text-[#ef3239] transition-colors cursor-pointer bg-transparent border-none z-20"
-            >
-              <ArrowRight size={32} strokeWidth={1.5} />
-            </button>
-          </motion.div>
-        </div>
-      </section>
+      {/* Testimonials */}
+      <Testimonials reviews={testimonials} />
       
       <CourseEnquireModal 
         isOpen={isQuoteModalOpen} 

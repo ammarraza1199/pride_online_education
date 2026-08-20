@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 const CourseEnquireModal = ({ isOpen, onClose, defaultCourse = "" }) => {
   if (!isOpen) return null;
@@ -7,9 +9,12 @@ const CourseEnquireModal = ({ isOpen, onClose, defaultCourse = "" }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     course: defaultCourse,
     comment: ''
   });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -21,11 +26,33 @@ const CourseEnquireModal = ({ isOpen, onClose, defaultCourse = "" }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form Data:', formData);
-    onClose();
+    setIsSubmitting(true);
+    
+    try {
+      await addDoc(collection(db, 'queries'), {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        course: formData.course,
+        message: formData.comment, // Map comment to message for AdminQueries
+        status: 'unread',
+        createdAt: serverTimestamp()
+      });
+      
+      alert('Thank you! Your enquiry has been sent successfully.');
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'form_submit', { form_name: 'course_enquiry' });
+      }
+      setFormData({ name: '', email: '', phone: '', course: defaultCourse, comment: '' });
+      onClose();
+    } catch (error) {
+      console.error('Error submitting query:', error);
+      alert('Failed to send enquiry. Please try again later.');
+    }
+    
+    setIsSubmitting(false);
   };
 
   return (
@@ -65,6 +92,20 @@ const CourseEnquireModal = ({ isOpen, onClose, defaultCourse = "" }) => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Type your email..." 
+                className="flex-1 border border-gray-200 rounded p-3 text-[14px] text-gray-700 outline-none focus:border-[#ef3239] transition-colors"
+                required
+              />
+            </div>
+            
+            {/* Phone */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+              <label className="sm:w-[120px] text-right text-gray-500 text-[15px]">Phone No</label>
+              <input 
+                type="tel" 
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Type your phone number..." 
                 className="flex-1 border border-gray-200 rounded p-3 text-[14px] text-gray-700 outline-none focus:border-[#ef3239] transition-colors"
                 required
               />
@@ -120,9 +161,10 @@ const CourseEnquireModal = ({ isOpen, onClose, defaultCourse = "" }) => {
           <button 
             type="button"
             onClick={handleSubmit}
-            className="px-8 py-2.5 bg-[#ef3239] text-white font-bold rounded hover:bg-[#d92a30] transition-colors shadow-sm"
+            disabled={isSubmitting}
+            className="px-8 py-2.5 bg-[#ef3239] text-white font-bold rounded hover:bg-[#d92a30] transition-colors shadow-sm disabled:opacity-70"
           >
-            Send
+            {isSubmitting ? 'Sending...' : 'Send'}
           </button>
         </div>
       </div>

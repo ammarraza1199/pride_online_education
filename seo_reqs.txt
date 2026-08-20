@@ -1,0 +1,175 @@
+SEO Requirements for Website Developer
+1. Website Structure
+Build the website with SEO-friendly, clean URLs such as:
+/ 
+/about-us 
+/online-degree 
+/bca-admission 
+/bcom-admission 
+/ba-admission 
+/iti-copa 
+/computer-courses 
+/online-exam-center 
+/contact-us 
+Do not use URLs like:/page?id=123
+2. Every Page Must Have SEO Controls
+The admin panel should allow me to edit:
+SEO Title 
+Meta Description 
+Focus Keyword 
+URL/Slug 
+Image ALT Text 
+Canonical URL 
+Open Graph Title 
+Open Graph Description 
+Open Graph Image 
+This is very important. Tell the developer you don't want to depend on them every time you need to change SEO.
+3. Heading Structure
+Every page should have:
+1 H1 only 
+H2 for major sections 
+H3 for sub-sections 
+Example:
+H1:Online Degree Admission in Belagavi
+H2:Online Degree Courses
+H2:Why Choose Us
+H2:Admission Process
+H2:Frequently Asked Questions
+4. Google Search Console Ready
+Developer must set up:
+Google Search Console verification 
+XML Sitemap 
+Robots.txt 
+Canonical URLs 
+HTTPS 
+Proper 301 redirects 
+The sitemap should automatically update when new pages are added.
+5. Google Business Profile / Local SEO
+Since you want students from Belagavi, the website should be designed for local SEO.
+Add:
+Business name 
+Address 
+Phone 
+Business hours 
+Google Maps 
+Contact information 
+Keep the business information consistent across the website and Google Business Profile.
+6. Local Business Schema
+Ask the developer to implement appropriate Schema.org structured data.
+At minimum, investigate:
+EducationalOrganization 
+LocalBusiness 
+Organization 
+Course 
+FAQPage 
+BreadcrumbList 
+Don't ask them to add every schema blindly; they should use only schema that accurately describes the page.
+7. Course Pages
+This is particularly important for your business.
+Every course should have its own SEO page.
+For example:
+/bca-admission-belgaum
+The page should contain:
+Course name 
+Eligibility 
+Duration 
+Admission process 
+Course details 
+University information 
+Fees, where appropriate 
+FAQs 
+Contact/Enquiry button 
+This gives Google individual pages to rank for individual searches.
+8. Mobile First
+Tell them:
+"The website must be designed mobile-first and work perfectly on Android, iPhone, tablet and desktop."
+Most of your enquiries may come from mobile users.
+9. Website Speed
+Ask for:
+WebP/AVIF images 
+Lazy loading 
+Image compression 
+Minified CSS/JS 
+Browser caching 
+CDN where appropriate 
+No unnecessary plugins/scripts 
+Target good Core Web Vitals, not just a high PageSpeed score.
+10. Image SEO
+The admin panel should allow:
+Image filename:online-degree-admission-belagavi.webp
+ALT:Online degree admission counselling in Belagavi
+Also make sure images don't become huge files.
+11. Internal Linking
+Tell the developer to make it easy to add internal links.
+Example:
+BCA page → Online Degree page → Admission page → Contact page
+This helps users and search engines discover related content.
+12. Blog / Information Section
+I strongly recommend having a blog.
+Example:
+/blog/
+Articles could include:
+How to Apply for Online Degree Admission 
+BCA Eligibility After PUC 
+Online Degree vs Regular Degree 
+Career Options After B.Com 
+Computer Courses After 10th 
+ITI COPA Course Details 
+The developer should make the blog SEO-friendly and easy for you to publish yourself.
+13. FAQ System
+Each important course page should allow FAQs.
+Example:
+Is BCA available online?
+What is the eligibility for BCA?
+How does online admission work?
+Make FAQs normal visible content on the page. Don't rely on hidden keyword text.
+14. Reviews / Testimonials
+Create a section for genuine student testimonials.
+Ideally:
+Student name 
+Course 
+Testimonial 
+Date, if appropriate 
+Don't create fake reviews or keyword-stuffed reviews.
+15. Lead Generation
+SEO is useful only if visitors become enquiries.
+Add:
+Call Now | WhatsApp | Enquire Now
+buttons.
+Also create enquiry forms with:
+Name 
+Mobile 
+Course interested in 
+City 
+Message 
+Track form submissions.
+16. Analytics & Conversion Tracking
+Ask the developer to install:
+Google Analytics 4 
+Google Search Console 
+Google Tag Manager 
+Track:
+Phone clicks 
+WhatsApp clicks 
+Enquiry form submissions 
+Course page visits 
+Admission enquiry conversions 
+This lets you know which SEO pages actually generate students.
+17. Very Important: Don't Build One Giant Page
+Tell the developer:
+"Do not put all courses and services on one page. Each major course/service must have its own SEO-friendly landing page."
+For example:
+❌
+website.com/courses
+containing 30 courses only.
+Better:
+website.com/bca-admissionwebsite.com/bcom-admissionwebsite.com/ba-admissionwebsite.com/iti-copawebsite.com/computer-courseswebsite.com/online-exam-center
+Most Important Requirement
+Give your developer this sentence:
+"Build the website SEO-first, not SEO-later. I must be able to independently edit page titles, meta descriptions, URLs, headings, ALT text, content, FAQs, schema where appropriate, sitemap, redirects and blog content from the admin panel without requiring a developer."
+And ask them to give you these before launch:
+☑ Google Search Console connected☑ Google Analytics connected☑ XML sitemap☑ Robots.txt☑ HTTPS☑ Mobile responsive☑ Fast loading/Core Web Vitals optimized☑ SEO-friendly URLs☑ Editable meta titles/descriptions☑ Editable ALT text☑ Canonical URLs☑ 301 redirect system☑ Breadcrumbs☑ Structured data/schema☑ Course-specific pages☑ Blog☑ FAQ sections☑ Google Maps/location information☑ WhatsApp/call tracking☑ Enquiry conversion tracking☑ No duplicate pages☑ No indexing of admin/login pages☑ 404 page☑ Backup/security system
+One more important point: don't let the developer promise "we will make you rank #1 on Google." A developer can make the website technically SEO-ready, but rankings also depend on content, competition, authority, links, reviews, and ongoing SEO work.
+If you want, I can also prepare a 1-page "SEO Requirements for Website Developer" document that you can directly WhatsApp/email to your developer.
+Top of Form
+Bottom of Form
