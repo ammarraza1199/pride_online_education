@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import { getDefaultCoursesByCategory } from '../data/defaultCourses';
 
 const UGCourse = () => {
   const [ugCourses, setUgCourses] = useState([]);
@@ -20,12 +21,23 @@ const UGCourse = () => {
           ...doc.data()
         }));
         
-        setUgCourses(courses);
         if (courses.length > 0) {
+          setUgCourses(courses);
           setActiveCourseId(courses[0].id);
+        } else {
+          const fallback = getDefaultCoursesByCategory('UG');
+          setUgCourses(fallback);
+          if (fallback.length > 0) {
+            setActiveCourseId(fallback[0].id);
+          }
         }
       } catch (error) {
-        console.error("Error fetching UG courses: ", error);
+        console.warn("Could not fetch UG courses from Firestore (using fallback):", error?.message || error);
+        const fallback = getDefaultCoursesByCategory('UG');
+        setUgCourses(fallback);
+        if (fallback.length > 0) {
+          setActiveCourseId(fallback[0].id);
+        }
       } finally {
         setLoading(false);
       }
@@ -145,7 +157,7 @@ const UGCourse = () => {
                       </div>
 
                       <div className="mt-[40px]">
-                        <Link to={`/${current.slug}`} className="inline-block bg-primary-red text-white py-[12px] px-[24px] rounded-[4px] font-bold hover:bg-primary-blue transition-colors duration-300">
+                        <Link to={current.to || `/${current.slug}`} className="inline-block bg-primary-red text-white py-[12px] px-[24px] rounded-[4px] font-bold hover:bg-primary-blue transition-colors duration-300">
                           View Full Course Details
                         </Link>
                       </div>

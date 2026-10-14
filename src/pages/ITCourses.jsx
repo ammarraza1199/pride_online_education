@@ -4,6 +4,7 @@ import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import { getDefaultCoursesByCategory } from '../data/defaultCourses';
 
 const ITCourses = () => {
   const [itCourses, setItCourses] = useState([]);
@@ -18,9 +19,14 @@ const ITCourses = () => {
           id: doc.id,
           ...doc.data()
         }));
-        setItCourses(courses);
+        if (courses.length > 0) {
+          setItCourses(courses);
+        } else {
+          setItCourses(getDefaultCoursesByCategory('IT'));
+        }
       } catch (error) {
-        console.error("Error fetching IT courses: ", error);
+        console.warn("Could not fetch IT courses from Firestore (using fallback):", error?.message || error);
+        setItCourses(getDefaultCoursesByCategory('IT'));
       } finally {
         setLoading(false);
       }
@@ -107,7 +113,7 @@ const ITCourses = () => {
                       title={course.title} 
                       description={course.description || course.seoDescription} 
                       image={course.image || '/images/it_code_image.png'} 
-                      to={`/${course.slug}`} 
+                      to={course.to || (course.slug ? `/${course.slug}` : '/it-courses')} 
                     />
                   </motion.div>
                 ))

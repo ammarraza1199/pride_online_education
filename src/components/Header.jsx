@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Phone, Mail, Menu, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Phone, Mail, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import CourseEnquireModal from './CourseEnquireModal';
 
 const LogoIcon = ({ className }) => (
@@ -19,14 +19,86 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [mobileExpanded, setMobileExpanded] = useState({});
+  const timeoutRef = useRef(null);
+  const location = useLocation();
+
+  const navItems = [
+    { title: 'Home', path: '/' },
+    { title: 'About Us', path: '/about-us' },
+    { 
+      title: 'IT Courses', 
+      path: '/it-courses',
+      children: [
+        { title: 'Python Programming', path: '/python-programming' },
+        { title: 'Software Developer', path: '/software-developer' },
+        { title: 'Digital Marketing & SEO', path: '/digital-marketing' },
+        { title: 'Digital Designing & UI/UX', path: '/digital-designing' },
+        { title: 'C & C++ Programming', path: '/c-cpp-programming' },
+        { title: 'Database Management (DBMS)', path: '/dbms' },
+        { title: 'CAD Careers & 3D Modeling', path: '/cad-careers' },
+        { title: 'View All IT Courses →', path: '/it-courses', isAll: true }
+      ]
+    },
+    { 
+      title: 'University Course', 
+      path: '/ug-course',
+      children: [
+        { title: 'B.A (Bachelor of Arts)', path: '/ba-admission', desc: '3 Years • Arts & Humanities' },
+        { title: 'B.Com (Bachelor of Commerce)', path: '/bcom-admission', desc: '3 Years • Finance & Accounts' },
+        { title: 'B.Sc (Bachelor of Science)', path: '/bsc-admission', desc: '3 Years • Science Stream' },
+        { title: 'BCA (Bachelor of Computer App)', path: '/bca-admission', desc: '3 Years • Software & IT' },
+        { title: 'View All UG Courses →', path: '/ug-course', isAll: true }
+      ]
+    },
+    { 
+      title: 'PG Course', 
+      path: '/pg-course',
+      children: [
+        { title: 'M.A (Master of Arts)', path: '/ma-admission', desc: '2 Years • Advanced Humanities' },
+        { title: 'M.Com (Master of Commerce)', path: '/mcom-admission', desc: '2 Years • Corporate Finance' },
+        { title: 'MBA (Master of Business Admin)', path: '/mba-admission', desc: '2 Years • Leadership & Management' },
+        { title: 'MCA (Master of Computer App)', path: '/mca-admission', desc: '2 Years • Software Systems' },
+        { title: 'View All PG Courses →', path: '/pg-course', isAll: true }
+      ]
+    },
+    { title: 'Contact Us', path: '/contact-us' }
+  ];
+
+  // Close dropdowns on route changes
+  useEffect(() => {
+    setActiveDropdown(null);
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  const handleMouseEnter = (title) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveDropdown(title);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 180);
+  };
+
+  const toggleMobileSubmenu = (title) => {
+    setMobileExpanded(prev => ({
+      ...prev,
+      [title]: !prev[title]
+    }));
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      // The top bar is 70px high.
       setIsSticky(window.scrollY > 70);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, []);
 
   return (
@@ -65,20 +137,20 @@ const Header = () => {
           </div>
 
           {/* Center-Right Business Hours and Button */}
-          <div className="flex items-center h-full mr-[70px]">
-            <span className="text-[#333333] font-semibold text-[18px] leading-none tracking-normal">
+          <div className="flex items-center h-full mr-[20px] lg:mr-[40px] xl:mr-[70px] flex-1 justify-end">
+            <span className="text-[#333333] font-semibold text-[13px] xl:text-[18px] leading-none tracking-normal hidden md:block">
               Mon - Sat 9:00am - 6:00pm / Sunday - CLOSED
             </span>
             
             {/* Enquire Button */}
-            <div className="ml-[70px] relative w-[150px] h-[54px]">
+            <div className="ml-[20px] xl:ml-[70px] relative w-[120px] xl:w-[150px] h-[45px] xl:h-[54px] shrink-0">
               {/* Shadow pseudo-element illusion */}
-              <div className="absolute top-[6px] left-[6px] w-[150px] h-[54px] bg-[#0D1C4A]" />
+              <div className="absolute top-[4px] left-[4px] xl:top-[6px] xl:left-[6px] w-[120px] xl:w-[150px] h-[45px] xl:h-[54px] bg-[#0D1C4A]" />
               
               {/* Actual Button */}
               <button 
                 onClick={() => setIsEnquireModalOpen(true)}
-                className="absolute top-0 left-0 w-[150px] h-[54px] bg-[#142B63] text-white font-bold text-[18px] flex items-center justify-center transition-all duration-300 hover:brightness-110 cursor-pointer border-none rounded-none outline-none leading-none z-10"
+                className="absolute top-0 left-0 w-[120px] xl:w-[150px] h-[45px] xl:h-[54px] bg-[#142B63] text-white font-bold text-[15px] xl:text-[18px] flex items-center justify-center transition-all duration-300 hover:brightness-110 cursor-pointer border-none rounded-none outline-none leading-none z-10"
               >
                 Enquire
               </button>
@@ -109,17 +181,70 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex flex-1 justify-start items-center ml-[110px] gap-[48px] pr-[60px]">
-            {['Home', 'About Us', 'IT Courses', 'University Course', 'PG Course', 'Blog', 'Contact Us'].map((text, idx) => {
-              const paths = ['/', '/about-us', '/it-courses', '/ug-course', '/pg-course', '/blog', '/contact-us'];
+          <nav className="hidden lg:flex flex-1 justify-end xl:justify-center items-center gap-[15px] xl:gap-[32px] pr-[20px] xl:pr-[60px] h-full">
+            {navItems.map((item) => {
+              const hasChildren = item.children && item.children.length > 0;
+              const isOpen = activeDropdown === item.title;
+
               return (
-                <NavLink 
-                  key={idx} 
-                  to={paths[idx]} 
-                  className={({isActive}) => `text-[18px] transition-colors duration-300 no-underline whitespace-nowrap ${isActive ? 'text-[#0B2A6A] font-bold' : 'text-[#333333] font-semibold hover:text-[#0D2C74]'}`}
+                <div
+                  key={item.title}
+                  className="relative h-full flex items-center"
+                  onMouseEnter={() => hasChildren && handleMouseEnter(item.title)}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  {text}
-                </NavLink>
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `flex items-center gap-1 text-[14px] xl:text-[17px] transition-colors duration-200 no-underline whitespace-nowrap py-2 ${
+                        isActive || isOpen
+                          ? 'text-[#0B2A6A] font-bold'
+                          : 'text-[#333333] font-semibold hover:text-[#0D2C74]'
+                      }`
+                    }
+                  >
+                    <span>{item.title}</span>
+                    {hasChildren && (
+                      <ChevronDown
+                        size={15}
+                        className={`transition-transform duration-200 ${
+                          isOpen ? 'rotate-180 text-primary-red' : 'text-gray-500'
+                        }`}
+                      />
+                    )}
+                  </NavLink>
+
+                  {/* Dropdown Menu */}
+                  {hasChildren && isOpen && (
+                    <div
+                      className="absolute top-[85%] left-0 pt-2 z-[100] min-w-[280px]"
+                      onMouseEnter={() => handleMouseEnter(item.title)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      <div className="bg-white rounded-lg shadow-xl border border-gray-100 py-2 overflow-hidden animate-in fade-in duration-150">
+                        {item.children.map((subItem) => (
+                          <Link
+                            key={subItem.path}
+                            to={subItem.path}
+                            onClick={() => setActiveDropdown(null)}
+                            className={`block px-5 py-3 transition-colors no-underline ${
+                              subItem.isAll
+                                ? 'bg-blue-50/70 text-[#0B1D52] font-bold border-t border-gray-100 hover:bg-blue-100 text-[14px] text-center mt-1'
+                                : 'text-[#333333] hover:bg-gray-50 hover:text-primary-red'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="font-semibold text-[15px]">{subItem.title}</span>
+                            </div>
+                            {subItem.desc && (
+                              <div className="text-[12px] text-gray-500 mt-0.5">{subItem.desc}</div>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               );
             })}
           </nav>
@@ -132,18 +257,60 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-[100%] left-0 w-full bg-white border-t border-[#e5e7eb] shadow-lg flex flex-col py-4 px-6 z-50">
-            {['Home', 'About Us', 'IT Courses', 'University Course', 'PG Course', 'Blog', 'Contact Us'].map((text, idx) => {
-              const paths = ['/', '/about-us', '/it-courses', '/ug-course', '/pg-course', '/blog', '/contact-us'];
+          <div className="lg:hidden absolute top-[100%] left-0 w-full bg-white border-t border-[#e5e7eb] shadow-lg flex flex-col py-4 px-6 z-50 max-h-[80vh] overflow-y-auto">
+            {navItems.map((item) => {
+              const hasChildren = item.children && item.children.length > 0;
+              const isExpanded = !!mobileExpanded[item.title];
+
               return (
-                <NavLink 
-                  key={idx} 
-                  to={paths[idx]} 
-                  className={({isActive}) => `text-[18px] py-3 border-b border-[#f0f0f0] no-underline ${isActive ? 'text-[#0B2A6A] font-bold' : 'text-[#333333] font-semibold'}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {text}
-                </NavLink>
+                <div key={item.title} className="border-b border-[#f0f0f0] py-2">
+                  <div className="flex items-center justify-between">
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) =>
+                        `text-[17px] font-semibold py-1.5 no-underline flex-1 ${
+                          isActive ? 'text-[#0B2A6A] font-bold' : 'text-[#333333]'
+                        }`
+                      }
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.title}
+                    </NavLink>
+                    {hasChildren && (
+                      <button
+                        onClick={() => toggleMobileSubmenu(item.title)}
+                        className="p-2 text-gray-500 hover:text-[#0B2A6A] bg-transparent border-none cursor-pointer"
+                        aria-label="Toggle Submenu"
+                      >
+                        <ChevronDown
+                          size={18}
+                          className={`transition-transform duration-200 ${
+                            isExpanded ? 'rotate-180 text-primary-red' : ''
+                          }`}
+                        />
+                      </button>
+                    )}
+                  </div>
+
+                  {hasChildren && isExpanded && (
+                    <div className="pl-4 pr-2 pb-2 pt-1 flex flex-col gap-2 bg-gray-50/70 rounded-md mt-1">
+                      {item.children.map((subItem) => (
+                        <Link
+                          key={subItem.path}
+                          to={subItem.path}
+                          className={`text-[15px] py-1.5 no-underline block ${
+                            subItem.isAll
+                              ? 'text-[#0B1D52] font-bold pt-2 border-t border-gray-200'
+                              : 'text-gray-700 hover:text-primary-red'
+                          }`}
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {subItem.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               );
             })}
             <div className="mt-6 flex flex-col gap-4">

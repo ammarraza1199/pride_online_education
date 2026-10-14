@@ -4,6 +4,7 @@ import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import CourseLayout from '../components/CourseLayout';
 import NotFound from './NotFound';
+import { getDefaultCourseBySlug } from '../data/defaultCourses';
 
 const CourseDetail = () => {
   const { slug } = useParams();
@@ -18,13 +19,23 @@ const CourseDetail = () => {
         const querySnapshot = await getDocs(q);
         
         if (querySnapshot.empty) {
-          setError(true);
+          const fallback = getDefaultCourseBySlug(slug);
+          if (fallback) {
+            setCourse(fallback);
+          } else {
+            setError(true);
+          }
         } else {
           setCourse({ id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() });
         }
       } catch (err) {
-        console.error("Error fetching course:", err);
-        setError(true);
+        console.warn("Error fetching course from Firestore, checking fallback:", err?.message || err);
+        const fallback = getDefaultCourseBySlug(slug);
+        if (fallback) {
+          setCourse(fallback);
+        } else {
+          setError(true);
+        }
       } finally {
         setLoading(false);
       }

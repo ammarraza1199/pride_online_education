@@ -4,7 +4,8 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../firebase/config';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
-import { Trash2, Edit, Plus, X, Image as ImageIcon } from 'lucide-react';
+import { Trash2, Edit, Plus, X, Image as ImageIcon, Database } from 'lucide-react';
+import { defaultCourses } from '../../data/defaultCourses';
 
 export default function AdminCourses() {
   const [courses, setCourses] = useState([]);
@@ -31,6 +32,44 @@ export default function AdminCourses() {
   const [faqs, setFaqs] = useState([]); // Array of { question, answer }
   
   const [saving, setSaving] = useState(false);
+  const [seeding, setSeeding] = useState(false);
+
+  const handleSeedCourses = async () => {
+    if (!window.confirm("This will upload all standard default courses (UG, PG, IT) to your Firebase Firestore database. Continue?")) return;
+    setSeeding(true);
+    try {
+      let added = 0;
+      for (const c of defaultCourses) {
+        const existing = courses.find(item => item.slug === c.slug || item.title === c.title);
+        if (!existing) {
+          await addDoc(collection(db, 'courses'), {
+            title: c.title,
+            category: c.category,
+            description: c.description || '',
+            to: c.to || `/${c.slug}`,
+            slug: c.slug,
+            image: c.image || '',
+            metaDescription: c.metaDescription || '',
+            heroSubtitle: c.heroSubtitle || '',
+            courseDetails: c.courseDetails || '',
+            eligibility: c.eligibility || '',
+            duration: c.duration || '',
+            universityInfo: c.universityInfo || '',
+            faqs: c.faqs || [],
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+          added++;
+        }
+      }
+      alert(`Successfully seeded ${added} courses to Firestore!`);
+    } catch (err) {
+      console.error("Error seeding courses:", err);
+      alert("Failed to seed courses: " + err.message + "\nPlease verify your Firestore Database security rules.");
+    } finally {
+      setSeeding(false);
+    }
+  };
 
   useEffect(() => {
     const q = query(collection(db, 'courses'), orderBy('category', 'asc'));
@@ -181,12 +220,22 @@ export default function AdminCourses() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Course Management</h1>
         {!isEditing && (
-          <button 
-            onClick={() => setIsEditing(true)}
-            className="flex items-center gap-2 bg-primary-blue text-white px-4 py-2 rounded hover:bg-blue-800 transition-colors"
-          >
-            <Plus size={20} /> Add New Course
-          </button>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={handleSeedCourses}
+              disabled={seeding}
+              className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700 transition-colors disabled:opacity-50"
+              title="Upload standard default courses to Firestore"
+            >
+              <Database size={18} /> {seeding ? 'Seeding...' : 'Seed Default Courses'}
+            </button>
+            <button 
+              onClick={() => setIsEditing(true)}
+              className="flex items-center gap-2 bg-primary-blue text-white px-4 py-2 rounded hover:bg-blue-800 transition-colors"
+            >
+              <Plus size={20} /> Add New Course
+            </button>
+          </div>
         )}
       </div>
 

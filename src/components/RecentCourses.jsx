@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import { getDefaultRecentCourses } from '../data/defaultCourses';
 
 const RecentCourses = () => {
   const scrollRef = useRef(null);
@@ -19,9 +20,14 @@ const RecentCourses = () => {
           id: doc.id,
           ...doc.data()
         }));
-        setCourses(fetchedCourses);
+        if (fetchedCourses.length > 0) {
+          setCourses(fetchedCourses);
+        } else {
+          setCourses(getDefaultRecentCourses(8));
+        }
       } catch (error) {
-        console.error("Error fetching recent courses: ", error);
+        console.warn("Could not fetch recent courses from Firestore (using fallback):", error?.message || error);
+        setCourses(getDefaultRecentCourses(8));
       } finally {
         setLoading(false);
       }
@@ -90,7 +96,7 @@ const RecentCourses = () => {
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {courses.map((course) => (
-                <Link to={`/${course.slug}`} key={course.id} className="min-w-[280px] sm:min-w-[320px] max-w-[350px] flex-shrink-0 bg-white rounded-md overflow-hidden shadow-sm hover:shadow-md transition-shadow snap-start no-underline block group">
+                <Link to={course.to || `/${course.slug}`} key={course.id} className="min-w-[280px] sm:min-w-[320px] max-w-[350px] flex-shrink-0 bg-white rounded-md overflow-hidden shadow-sm hover:shadow-md transition-shadow snap-start no-underline block group">
                   {/* Image */}
                   <div className="w-full h-[250px] bg-[#d1d1d1] relative overflow-hidden group-hover:opacity-90 transition-opacity">
                     {course.image ? (
